@@ -1,0 +1,93 @@
+package cadag_figueroa_finalssummative1;
+
+import java.util.Scanner;
+
+public class Cadag_Figueroa_FinalsSummative1 {
+    public static void main(String[] args) {
+        //Variable and Class Declaration
+        Scanner console = new Scanner(System.in);
+        System.out.print("Enter the size for the matrix: "); //Prompts the user to enter the size for the matrix.
+        
+        boolean equalRows = false;
+        boolean equalColumns = false;
+        
+        String equal1st = "";
+        String equal2nd = "";
+        
+        int diag1 = 0;
+        int diag2 = 0;
+        int arrNum = console.nextInt(); 
+        int [][] array = new int [arrNum][arrNum];
+        
+        System.out.println("\nElements of the array:");
+        
+        for(int row = 0; row < arrNum; row++){ //This block of code produce random values (0–1) based on the user input provided to initialize a 2D array, and to display the said 2D array.                                     
+            for(int col = 0; col < arrNum; col++){   
+                int ran = (int) (Math.random() * 2); 
+                array[row][col]= ran;
+                System.out.print(array[row][col]+ " ");
+            }
+            System.out.println();
+        }
+        System.out.println("**********************");
+        
+        for(int row = 0; row < arrNum; row++){ //This block of code (Nested for-loop) determines whether a row or column has generated N value or a final value of 0. 
+            int rowSum = 0;
+            int colSum = 0;
+            for(int col = 0; col < arrNum; col++) { //This block of code (for-loop) checks whether a row or column has same values (0s or 1s) all throughout the 2D array.
+                rowSum += array[row][col]; //These 2 lines of code sums up the rows or columns whether it returns 0 or equals to the arrNum (Matrix) means that it has same values.
+                colSum += array[col][row]; 
+            }
+            if(colSum == 0){ //These conditional statements determines whether rowSum/colSum returns true and will output a prompt to the user.
+                equalColumns = true;
+                System.out.println("All 0s in col "+row);
+            }
+            if(colSum == arrNum){
+                equalColumns = true;
+                System.out.println("All 1s in col "+row);
+            }
+            if(rowSum == 0){
+                equalRows = true;
+                System.out.println("All 0s in row "+row);
+            }
+            if(rowSum == arrNum){
+                equalRows = true;
+                System.out.println("All 1s in row "+row);
+            }
+        }
+
+        if (!equalRows){ //Checking whether the value has been changed, returned by the conditional statements above. 
+            System.out.println("Rows does not have equal numbers"); //These conditional statements also checks whether the 2D array has equal rows or columns from the random generated matrix. 
+        }
+        if(!equalColumns){
+            System.out.println("Columns does not have equal numbers");
+      
+        }
+        for(int row = 0, col = arrNum -1; row < arrNum; row++ ,col--){ //This block of code (for-loop) checks whether the 1st or 2nd diagonal has same values (0s or 1s) all throughout the 2D array.
+            diag1 += array[row][row]; //These 2 lines of code sums up the diagonal whether it returns 0 or equals to the arrNum (Matrix) means that it has same values.
+            diag2 += array[row][col];
+        }
+        
+        if(diag1 == 0){ //These conditional statements prompts the user if the sum of the 1st or 2nd diagonal does have equal values of (0s or 1s).
+            equal1st = "All 0s in 1st diagonal";
+            }
+        if(diag1 == arrNum){
+            equal1st = "All 1s in 1st diagonal";
+            }
+        if(diag2 == 0){
+            equal2nd = "All 0s in 2nd diagonal";    
+            }
+        if(diag2 == arrNum){
+            equal2nd = "All 1s in 2nd diagonal ";
+            }
+        
+        if ("".equals(equal1st)){ //These conditional statements prompts the user if the 1st or 2nd diagonal does not have equal values.
+            equal1st = "1st diagonal does not have equal numbers"; 
+        }
+        if("".equals(equal2nd)){
+            equal2nd = "2nd diagonal does not have equal numbers";
+        }
+        System.out.println(equal1st);
+        System.out.println(equal2nd);     
+    }
+}
